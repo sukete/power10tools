@@ -21,6 +21,7 @@ ARG.add_argument('--lparid','-i',default="NONE",help="new LPAR id after being mo
 ARG.add_argument('--hmc','-H',default="",help="HMC used to move the LPAR")
 ARG.add_argument('--fcadapter','-f',default='NONE',help="physical FC adapters used by virtual FC adapters. Default is same as original system" )
 ARG.add_argument('--red','-r',default='10.0.0',help="Network used by mover partitions")
+ARG.add_argument('--remoteHMC','-R',default='NONE',help="IP or name of remote HMC")
 ARG.add_argument('--preview','-p',default='yes',help="Performs migration if preview values is \'no\' ")
 options=ARG.parse_args()
 
@@ -34,6 +35,13 @@ new_lpar_id=options.lparid
 list_fc=options.fcadapter
 red_msp=options.red
 PREVIEW=options.preview.upper()
+remote_hmc=options.remoteHMC
+
+
+if (remote_hmc=="NONE"):
+   IP=""
+else:
+   IP="--ip "+remote_hmc
 
 # Obtenemos el ID de la LPAR
 
@@ -118,9 +126,9 @@ SRC_MSPID=SRC_MSPID.replace('\'','')
 
 # VALIDAMOS la migracion de la LPAR
 print ("Validating migration\n")
-CMD=SSH+"  \"migrlpar -o v -m "+CEC+" -t "+CEC_TGT+" -p "+lpar_name+" --vlanbridge 1 --uuid 1  -i \\\"\\\\\\\"virtual_fc_mappings="+VFCMAP+"\\\\\\\",dest_lpar_id="+str(ID)+",source_msps="+SRC_MSP+"/"+SRC_MSPID+"/"+SRC_MSPIP+",dest_msps="+DEST_MSP+"/"+DEST_MSPID+"/"+DEST_MSPIP+",dest_msp_id=1"+DEST_MSPID+",source_msp_id="+SRC_MSPID+"\\\"\""
+CMD=SSH+"  \"migrlpar "+IP+" -o v -m "+CEC+" -t "+CEC_TGT+" -p "+lpar_name+" --vlanbridge 1 --uuid 1  -i \\\"\\\\\\\"virtual_fc_mappings="+VFCMAP+"\\\\\\\",dest_lpar_id="+str(ID)+",source_msps="+SRC_MSP+"/"+SRC_MSPID+"/"+SRC_MSPIP+",dest_msps="+DEST_MSP+"/"+DEST_MSPID+"/"+DEST_MSPIP+",dest_msp_id=1"+DEST_MSPID+",source_msp_id="+SRC_MSPID+"\\\"\""
 subprocess.call (CMD,shell=True)
-CMD=SSH+"  \"migrlpar -o m -m "+CEC+" -t "+CEC_TGT+" -p "+lpar_name+" --vlanbridge 1 --uuid 1  -i \\\"\\\\\\\"virtual_fc_mappings="+VFCMAP+"\\\\\\\",dest_lpar_id="+str(ID)+",source_msps="+SRC_MSP+"/"+SRC_MSPID+"/"+SRC_MSPIP+",dest_msps="+DEST_MSP+"/"+DEST_MSPID+"/"+DEST_MSPIP+",dest_msp_id=1"+DEST_MSPID+",source_msp_id="+SRC_MSPID+"\\\"\""
+CMD=SSH+"  \"migrlpar "+IP+" -o m -m "+CEC+" -t "+CEC_TGT+" -p "+lpar_name+" --vlanbridge 1 --uuid 1  -i \\\"\\\\\\\"virtual_fc_mappings="+VFCMAP+"\\\\\\\",dest_lpar_id="+str(ID)+",source_msps="+SRC_MSP+"/"+SRC_MSPID+"/"+SRC_MSPIP+",dest_msps="+DEST_MSP+"/"+DEST_MSPID+"/"+DEST_MSPIP+",dest_msp_id=1"+DEST_MSPID+",source_msp_id="+SRC_MSPID+"\\\"\""
 print ("\n Command to execute: ")
 print (CMD)
 if (PREVIEW=='NO'):
