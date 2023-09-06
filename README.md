@@ -3,7 +3,8 @@ python tools to manage IBM power systems
 this project includes several scripts written using python to manage IBM power systems
 #### miglpar.py
 this script performs a Live Partition movility to migrate a LPAR from one system to other. 
-**
+
+***
 python3 ./miglpar.py -h
 usage: miglpar.py [-h] [--system SYSTEM] [--destino DESTINO] [--lpar LPAR] [--lparid LPARID] [--hmc HMC] [--fcadapter FCADAPTER]
                   [--red RED] [--preview PREVIEW]
@@ -27,5 +28,5 @@ optional arguments:
                         Performs migration if preview values is 'no|NO|No|nO'
 
 ***
-physical FC adapter are specified as a list like "adap#:vio#,adap#:vio#" where adap is the adapter name (i.e. fcs0) and vio# is the id from the vio where the adapter resides.
-At this version, remote lpar migration is not supported
+-> physical FC adapter are specified as a list like "adap#:vio#,adap#:vio#" where adap is the adapter name (i.e. fcs0) and vio# is the id from the vio where the adapter resides.
+-> At this version, remote lpar migration is not supported
