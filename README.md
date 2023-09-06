@@ -11,8 +11,13 @@ usage: miglpar.py [-h] [--system SYSTEM] [--destino DESTINO] [--lpar LPAR] [--lp
 
 Moves LPAR from one IBM POWER system to other
 
-optional arguments:
+python3 ./miglpar.py -h
+usage: miglpar.py [-h] [--system SYSTEM] [--destino DESTINO] [--lpar LPAR] [--lparid LPARID] [--hmc HMC] [--fcadapter FCADAPTER]
+                  [--red RED] [--remoteHMC REMOTEHMC] [--preview PREVIEW]
 
+Moves LPAR from one IBM POWER system to other
+
+optional arguments:
   -h, --help            show this help message and exit
   --system SYSTEM, -s SYSTEM
                         Source POWER System
@@ -25,10 +30,13 @@ optional arguments:
   --fcadapter FCADAPTER, -f FCADAPTER
                         physical FC adapters used by virtual FC adapters. Default is same as original system
   --red RED, -r RED     Network used by mover partitions
+  --remoteHMC REMOTEHMC, -R REMOTEHMC
+                        IP or name of remote HMC
   --preview PREVIEW, -p PREVIEW
-                        Performs migration if preview values is 'no|NO|No|nO'
+                        Performs migration if preview values is 'no'
+
 
 ***
 -> physical FC adapter are specified as a list like "adap#:vio#,adap#:vio#" where adap is the adapter name (i.e. fcs0) and vio# is the id from the vio where the adapter resides. 
 
--> At this version, remote lpar migration is not supported.
+ 
