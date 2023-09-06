@@ -28,6 +28,6 @@ optional arguments:
                         Performs migration if preview values is 'no|NO|No|nO'
 
 ***
--> physical FC adapter are specified as a list like "adap#:vio#,adap#:vio#" where adap is the adapter name (i.e. fcs0) and vio# is the id from the vio where the adapter resides.
+-> physical FC adapter are specified as a list like "adap#:vio#,adap#:vio#" where adap is the adapter name (i.e. fcs0) and vio# is the id from the vio where the adapter resides.\n
 
 -> At this version, remote lpar migration is not supported.
