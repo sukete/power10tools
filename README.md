@@ -12,6 +12,7 @@ usage: miglpar.py [-h] [--system SYSTEM] [--destino DESTINO] [--lpar LPAR] [--lp
 Moves LPAR from one IBM POWER system to other
 
 optional arguments:
+
   -h, --help            show this help message and exit
   --system SYSTEM, -s SYSTEM
                         Source POWER System
@@ -28,6 +29,6 @@ optional arguments:
                         Performs migration if preview values is 'no|NO|No|nO'
 
 ***
--> physical FC adapter are specified as a list like "adap#:vio#,adap#:vio#" where adap is the adapter name (i.e. fcs0) and vio# is the id from the vio where the adapter resides.\n
+-> physical FC adapter are specified as a list like "adap#:vio#,adap#:vio#" where adap is the adapter name (i.e. fcs0) and vio# is the id from the vio where the adapter resides. 
 
 -> At this version, remote lpar migration is not supported.
